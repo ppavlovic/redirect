@@ -1,4 +1,4 @@
-wl-config
+g4/redirect
 ======
 
 ## Install
@@ -14,11 +14,11 @@ composer require g4/redirect
 
 ### Install dependencies
 
-    $ make install
+    $ composer install
 
 ### Run tests
 
-    $ make unit-tests
+    $ composer unit-test
     
 ### Run psr2 check
 

@@ -20,8 +20,8 @@ class Redirect
 
     public function location(Url $url)
     {
-        header('Location: ' . (string) $url, Http::CODE_301);
-        exit();
+        $this->sendHeader('Location: ' . (string) $url, Http::CODE_301);
+        $this->terminate();
     }
 
     public function redirectPermanently()
@@ -66,7 +66,31 @@ class Redirect
 
     private function doRedirect($code)
     {
-        header('Location: ' . (string) $this->location, false, $code);
+        $this->sendHeaderWithCode('Location: ' . (string) $this->location, false, $code);
+        $this->terminate();
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    protected function sendHeader($header, $code)
+    {
+        header($header, $code);
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    protected function sendHeaderWithCode($header, $replace, $code)
+    {
+        header($header, $replace, $code);
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    protected function terminate()
+    {
         exit();
     }
 }
